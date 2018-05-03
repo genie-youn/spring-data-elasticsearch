@@ -23,7 +23,8 @@ import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
  * @author Artur Konczak
  * @author Petar Tahchiev
  */
-public interface SearchResultMapper {
+@FunctionalInterface
+public interface SearchResultMapper<T> {
 
-	<T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable);
+	AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable);
 }

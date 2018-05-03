@@ -676,9 +676,9 @@ public class ElasticsearchTemplate implements ElasticsearchOperations, Applicati
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(deleteQuery.getQuery()).withIndices(indexName)
 				.withTypes(typeName).withPageable(PageRequest.of(0, pageSize)).build();
 
-		SearchResultMapper onlyIdResultMapper = new SearchResultMapper() {
+		SearchResultMapper onlyIdResultMapper = new SearchResultMapper<T>() {
 			@Override
-			public <T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
+			public AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
 				List<String> result = new ArrayList<String>();
 				for (SearchHit searchHit : response.getHits().getHits()) {
 					String id = searchHit.getId();
