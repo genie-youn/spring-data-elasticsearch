@@ -803,29 +803,7 @@ public class ElasticsearchTemplateTests {
 		assertThat(sampleEntities.size(), is(equalTo(30)));
 	}
 
-
-//	SearchResultMapper searchResultMapper = new SearchResultMapper<T>() {
-//		@Override
-//		public AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
-//			List<SampleEntity> result = new ArrayList<SampleEntity>();
-//			for (SearchHit searchHit : response.getHits()) {
-//				if (response.getHits().getHits().length <= 0) {
-//					return new AggregatedPageImpl<T>(Collections.EMPTY_LIST, response.getScrollId());
-//				}
-//				String message = (String) searchHit.getSourceAsMap().get("message");
-//				SampleEntity sampleEntity = new SampleEntity();
-//				sampleEntity.setId(searchHit.getId());
-//				sampleEntity.setMessage(message);
-//				result.add(sampleEntity);
-//			}
-//
-//			if (result.size() > 0) {
-//				return new AggregatedPageImpl<T>((List<T>) result, response.getScrollId());
-//			}
-//			return new AggregatedPageImpl<T>(Collections.EMPTY_LIST, response.getScrollId());
-//		}
-//	};
-
+	
 	public AggregatedPage<SampleEntity> searchResultMapper(SearchResponse response, Class<SampleEntity> clazz,
 			Pageable pageable) {
 		List list = Arrays.stream(response.getHits().getHits()).map(h ->
